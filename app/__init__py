@@ -1,0 +1,22 @@
+from flask import flask
+
+fro .models.database import criar_tabelas, popular_dados_exemplo
+
+def create_app():
+    app =flask(__name__)
+    app.config['Secret_key'] = 'barbearia-escola-2024'
+
+    from .controllers.main_controller import main_bp
+    from .controllers.barbeiro_controller import barbeiro_bp
+    from .controllers.cliente_controller import cliente_bp
+    from .controllers.agendmento_controller import agendamento_bp
+
+    app.register_blueprint(main_bp)
+    app.register_blueprint(barbeiro_bp)
+    app.register_blueprint( cliente_bp)
+    app.register_blueprint(agendamento_bp)
+
+    criar_tabelas()
+    popular_dados_exemplo()
+
+    return app
